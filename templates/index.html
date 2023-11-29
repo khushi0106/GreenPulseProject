@@ -47,6 +47,34 @@
         <label for="codeSnippet">Enter a code snippet:</label>
         <textarea id="codeSnippet" name="codeSnippet" rows="10" cols="30" required style="padding: 10px; resize: vertical; font-family: 'Arial', sans-serif; background-color: #f4f4f4; border: 1px solid #ccc; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); transition: box-shadow 0.3s;"></textarea>
         <br>
+        {% comment %} <div class="dl">
+            <div class="dl-box">
+                <div class="dl-button">
+                    <div class="arrow"></div>
+                    <div class="basket">
+                        <div class="basket-top"></div>
+                    </div>
+                </div>
+                <div class="dl-progress">
+                    <div class="check">
+                        <svg>
+                            <use xlink:href="#check" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <div class="dl-status">
+                <div class="text text-file">Status</div>
+                <div class="text text-number"></div>
+            </div>
+        </div>
+        <svg xmlns="http://www.w3.org/2000/svg"
+        style="display: none;">
+        <symbol xmlns="http://www.w3.org/2000/svg" id="check" viewBox="0 0 130 130">
+            <polyline points="100.2,40.2 51.5, 88.8 29.8, 67.5" />
+        </symbol>
+    </svg> {% endcomment %}
+
         <button class="analyze-button" type="button" onclick="analyzeCode()">Analyze Code</button>
     </form>
     <div id="result"></div>
