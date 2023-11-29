@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Green Pulse</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;900&family=Ubuntu:wght@300&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"> </script>
+
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/1ad6184770.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="static/styles.css">
+
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+        <a class="navbar-brand" href=""><img src="static/images/green-pulse-logo.png" alt="Green Pulse Logo" class="logo"></a>
+        
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+
+            <ul class="navbar-nav ms-auto">
+                
+                <li class="nav-item">
+                    <a href="#" class="icon"><i class="fa-solid fa-heart-pulse" style="color: #239530;"></i></a>
+                </li>
+                <li class="nav-item">
+                    <a href="/documentation" class="icon"><i class="fa-solid fa-book" style="color: #239530;"></i></a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://github.com/greencodeproject" target="_blank" class="icon"><i class="fa-brands fa-github" style="color: #239530;"></i></a>
+                </li>
+    
+            </ul>            
+        </div>       
+    </nav>
+
+   <div class="codesection"> 
+
+    <form id="codeForm">
+        <label for="codeSnippet">Enter a code snippet:</label>
+        <textarea id="codeSnippet" name="codeSnippet" rows="10" cols="30" required style="padding: 10px; resize: vertical; font-family: 'Arial', sans-serif; background-color: #f4f4f4; border: 1px solid #ccc; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); transition: box-shadow 0.3s;"></textarea>
+        <br>
+        <button class="analyze-button" type="button" onclick="analyzeCode()">Analyze Code</button>
+    </form>
+    <div id="result"></div>
+
+   </div>
+
+    <script>
+        function analyzeCode() {
+            var codeSnippet = document.getElementById("codeSnippet").value;
+
+            // Send code snippet to Flask backend for analysis
+            fetch('/analyze', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ code: codeSnippet })
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Display results
+                document.getElementById("result").innerHTML = `<h2>Analysis Result</h2>
+                <p style="margin-bottom: 10px; color: #007bff;">Optimized Rating: ${data.optimized_rating}</p>
+                <p style="margin-bottom: 10px; color: #333;">Message: ${data.message}</p>
+                <h3 style="color: #28a745;">Predicted Metrics</h3>
+                <p style="margin-bottom: 10px; color: #333;">Lines of Code: ${data.predicted_metrics.lines_of_code}</p>
+                <p style="margin-bottom: 10px; color: #333;">Number of Components: ${data.predicted_metrics.number_of_components}</p>
+                <p style="color: #333;">Syntax Errors: ${data.predicted_metrics.syntax_errors}</p>`;
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
+</body>
+</html>
