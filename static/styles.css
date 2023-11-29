@@ -1,0 +1,73 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #F2FFE9; /* Light Green */
+    margin: 20px;
+}
+
+h1 {
+    color: #557C55; /* Green */
+}
+
+#codeForm {
+    margin-top: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+#codeSnippet {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: #557C55; /* Green */
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+}
+
+.logo{
+    width: 400pxpx; 
+    height: 100px;
+}
+
+.codeForm{
+    font-family: 'Arial', sans-serif;
+    background-color: #F2FFE9; /* Light Green */
+}
+
+.codesection{
+    margin: 2% 5%;
+}
+
+button:hover {
+    background-color: #609966; /* Dark Green */
+}
+
+.analyze-button {
+    display: block;
+    margin: 0 auto;
+  }
+
+#result {
+    margin-top: 20px;
+}
+
+.nav-item{
+    font-size: x-large;
+    padding: 0 18px;
+}
+  
+.nav-link{
+    font-size: 5rem;
+    font-family: 'Montserrat-light', sans-serif;
+}
+
+.navbar{
+    padding: 0rem 1rem 1rem 1rem;
+}
