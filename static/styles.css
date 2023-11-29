@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap'); */
 
 
 body {
@@ -78,7 +78,7 @@ button:hover {
 /* Github dashboard  */
 
 
-:root{
+/* :root{
     --color-primary: #6C9BCF;
     --color-danger: #FF0060;
     --color-success: #1B9C85;
@@ -128,13 +128,14 @@ body{
     height: 100vh;
     font-family: 'Poppins', sans-serif;
     font-size: 0.88rem;
-    /* user-select: none; */
+    user-select: none; 
     overflow-x: hidden;
     color: var(--color-dark);
     background-color: var(--color-background);
 }
+*/
 
-a{
+/* a{
     color: var(--color-dark);
 }
 
@@ -783,5 +784,6 @@ main .recent-orders a{
         font-size: 2rem;
     }
 
-}
+}  */
+
 
