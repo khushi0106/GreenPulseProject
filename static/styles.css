@@ -1,4 +1,4 @@
-
+@import url(https://fonts.googleapis.com/css?family=DM+Sans:500,700,400|Poppins:700);
 /* Index/Upload page CSS here */
 
 h1 {
@@ -71,47 +71,121 @@ button:hover {
 
 /* Main Dashboard CSS here */
 
-.sidebar{
-    width: 100%; 
-    height: 100%; 
-    flex-direction: column; 
-    justify-content: flex-start; 
-    align-items: flex-start; 
-    gap: 10px; display: inline-flex
+/* Sidebar CSS */
+
+.side-bar-notification-pro-cta-avatar{
+    background-color: #1b1c1f;
+    height: 1152px;
+    overflow: hidden;
+    position: relative;
+    width: 290px;
 }
 
-.sidebar_1{
-    width: 290px; 
-    height: 1152px; 
-    position: relative; 
-    background: #1B1C20
+.flex-col{
+    align-items: flex-end;
+    display: flex;
+    flex-direction: column;
+    min-height: 428px;
+    position: relative;
+    top: 56px;
 }
 
-.sidebar_2{
-    width: 259px; 
-    height: 316px; 
-    left: 31px; 
-    top: 168px; 
-    position: absolute
+.separator{
+    background-image: url(https://cdn.animaapp.com/projects/656868fbcff8db5c77092c2px/releases/6568699928abc7c9ac9dcd56px/img/separator.svg);
+    background-position: 50% 50%;
+    height: 1px;
+    margin-right: 0;
+    margin-top: 47px;
+    width: 290px;
 }
 
-.sidebar_3{
-    width: 257px; 
-    height: 36px; 
-    left: 2px; 
-    top: 224px; 
-    position: absolute
+.surname{
+    align-self: center;
+    color: var(--white);
+    font-family: var(--font-size-1);
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: 26px;
+    margin-right: 15px;
+    min-width: 167px;
+    white-space: nowrap;
 }
 
-.sidebar_4{
-    left: 36px; 
-    top: 3px; 
-    position: absolute; 
-    color: white; 
-    font-size: 16px; 
-    font-family: DM Sans; 
-    font-weight: 500; 
-    line-height: 30px; 
-    word-wrap: break-word
+.pages{
+    align-items: flex-end;
+    display: flex;
+    gap: 20px;
+    margin-top: 38px;
+    min-height: 316px;
+    width: 259px;
+}
+
+.pages-item{
+    align-items: center;
+    display: flex;
+    gap: 12px;
+    height: 36px;
+    margin-right: -2px;
+    min-width: 259px;
+}
+
+.sidebar .pagetitle-5{
+    letter-spacing: -0.32px;
+    line-height: 30px;
+    white-space: nowrap;
+}
+
+.pagetitle-2{
+    min-width: 68px;
+}
+
+.icon{
+    height: 24px;
+    width: 24px;
+}
+
+.tables{
+    align-items: center;
+    display: flex;
+    gap: 10px;
+    height: 36px;
+    margin-right: -2px;
+    min-width: 261px;
+}
+
+.icon-1{
+    height: 28px;
+    width: 28px;
+}
+
+.pagetitle-1{
+    min-width: 81px;
+}
+
+.dashboard{
+    align-items: center;
+    display: flex;
+    margin-right: -2px;
+    min-width: 259px;
+}
+
+.pagetitle{
+    color: var(--white);
+    font-family: var(--font-family-dm_sans);
+    font-weight: 700;
+    margin-left: 12px;
+    min-width: 54px;
+}
+
+.active{
+    background-color: var(--white);
+    border-radius: 25px;
+    height: 36px;
+    margin-left: 163px;
+    width: 4px;
+}
+
+.pagetitle-3{
+    min-width: 46px;
 }
 
