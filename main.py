@@ -1,7 +1,8 @@
 from flask import Flask, render_template, request, jsonify
 import joblib
 from sklearn.feature_extraction.text import TfidfVectorizer
-import re
+import re, os
+import json
 
 app = Flask(__name__)
 
@@ -25,8 +26,63 @@ def index():
 
 @app.route('/analyze', methods=['POST'])
 def analyze():
-    try:
+    try:        
+        samplecode_path = 'samplecode.py'
+        with open(samplecode_path, 'w') as file:
+            file.write('')
+        
+        if 'file' not in request.files:
+            return jsonify({'error': 'No file found'})
+            
+        file = request.files['file']
+           
+        if file.filename=='':
+            return jsonify({'error': 'No selected file'})
+        
+        file_contents = file.read()
+            
+        #code_snippet = request.files['file']
+        #print(code_snippet)
+        
+        with open(samplecode_path, 'w') as f:
+            f.write(file_contents.decode('utf-8'))
+            
+        import jdoodle
+        response = jdoodle.compile_and_execute_code()
+        print(response)
+        
+        if response == True:
+            import pylint
+            lint_response = pylint.run_pylint()
+            print(lint_response)
+            
+            import psutillog
+            util_cpu, util_cpucount, util_memory = psutillog.run_code_file()
+            print(util_cpu, util_cpucount, util_memory)
+            
+            result = {
+                "jdoodle_response": "Compiled" if response==True else "Not Compiled",
+                "lint_response": lint_response,
+                "util_cpu": util_cpu,
+                "util_cpucount": util_cpucount,
+                "util_memory": util_memory 
+            }
+            return jsonify(result)
+            
+      #  else:
+       #     return jsonify({'Failure': 'File is not compilable. Return with compilable file'})    
+
+    except Exception as e:
+        return jsonify({'error': str(e)})
+        
+if __name__ == '__main__':
+    app.run(port=5000, debug=True)
+
+        
+    """  
         code_snippet = request.json['code']
+        
+        
 
          # Check if the code snippet is valid
         if not is_valid_code(code_snippet):
@@ -50,7 +106,4 @@ def analyze():
     
     except Exception as e:
         return jsonify({"error": str(e)})
-
-if __name__ == '__main__':
-    app.run(port=5000, debug=True)
-
+"""

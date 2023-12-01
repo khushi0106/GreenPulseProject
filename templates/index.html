@@ -49,41 +49,71 @@
 
    <div class="codesection"> 
 
-    <form id="codeForm">
-        <label for="codeSnippet">Enter a code snippet:</label>
-        <textarea id="codeSnippet" name="codeSnippet" rows="10" cols="30" required style="padding: 10px; resize: vertical; font-family: 'Arial', sans-serif; background-color: #f4f4f4; border: 1px solid #ccc; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); transition: box-shadow 0.3s;"></textarea>
-        <br>
+    <form id="codeForm" enctype="multipart/form-data">
+        
+        <label for="file">Upload a python file</label> <br>
+        <input type="file" id="file" name="file" accept=".py"> <br>
         <button class="analyze-button" type="button" onclick="analyzeCode()">Analyze Code</button>
     </form>
-    <div id="result"></div>
+    <div id="result">
 
+    </div>
    </div>
+
 
     <script>
         function analyzeCode() {
-            var codeSnippet = document.getElementById("codeSnippet").value;
+            // Get the file input element
+            var fileInput = document.getElementById('file');
+            
+            var formData = new FormData();
 
-            // Send code snippet to Flask backend for analysis
+            formData.append('file', fileInput.files[0]);
+    
             fetch('/analyze', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ code: codeSnippet })
+                body: formData
             })
             .then(response => response.json())
             .then(data => {
-                // Display results
-                document.getElementById("result").innerHTML = `<h2>Analysis Result</h2>
-                <p style="margin-bottom: 10px; color: #007bff;">Optimized Rating: ${data.optimized_rating}</p>
-                <p style="margin-bottom: 10px; color: #333;">Message: ${data.message}</p>
-                <h3 style="color: #28a745;">Predicted Metrics</h3>
-                <p style="margin-bottom: 10px; color: #333;">Lines of Code: ${data.predicted_metrics.lines_of_code}</p>
-                <p style="margin-bottom: 10px; color: #333;">Number of Components: ${data.predicted_metrics.number_of_components}</p>
-                <p style="color: #333;">Syntax Errors: ${data.predicted_metrics.syntax_errors}</p>`;
+                //Analysis Results: 
+                document.getElementById('result').innerHTML = `<h2>Analysis Results</h2>
+                <p style="margin-bottom: 10px; color: #007bff;">Jdoodle Response: ${data.jdoodle_response}</p>
+                <p style="margin-bottom: 10px; color: #333;">Pylint Response: ${data.lint_response}</p>
+                <p style="margin-bottom: 10px; color: #333;">Cpu percentage: ${data.util_cpu}</p>
+                <p style="margin-bottom: 10px; color: #333;">CPU Count: ${data.util_cpucount}</p>
+                <p style="color: #333;">Memory Usage: ${data.util_memory}</p>`;
             })
-            .catch(error => console.error('Error:', error));
+            .catch(error => {
+                console.error('Error:', error);
+            });
         }
     </script>
 </body>
 </html>
+
+
+<!--
+var json_data = document.getElementById("json_data").value;
+
+// Send code snippet to Flask backend for analysis
+fetch('/analyze', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ code: json_data })
+})
+.then(response => response.json())
+.then(data => {
+    // Display results
+    document.getElementById("result").innerHTML = `<h2>Analysis Result</h2>
+    <p style="margin-bottom: 10px; color: #007bff;">Optimized Rating: ${data.optimized_rating}</p>
+    <p style="margin-bottom: 10px; color: #333;">Message: ${data.message}</p>
+    <h3 style="color: #28a745;">Predicted Metrics</h3>
+    <p style="margin-bottom: 10px; color: #333;">Lines of Code: ${data.predicted_metrics.lines_of_code}</p>
+    <p style="margin-bottom: 10px; color: #333;">Number of Components: ${data.predicted_metrics.number_of_components}</p>
+    <p style="color: #333;">Syntax Errors: ${data.predicted_metrics.syntax_errors}</p>`;
+})
+.catch(error => console.error('Error:', error));
+-->
