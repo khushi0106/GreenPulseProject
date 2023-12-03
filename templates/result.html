@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <title>Result</title>
+</head>
+<body>
+
+    <p> displaying result page </p>
+    <div id="jdoodle">
+
+    </div>
+<script>
+    jQuery.ajax({
+        type: 'GET',
+        url: '/call_jdoodle',
+        success: function(response) {
+            console.log('Python function result:', response.response);
+            if(response.response === true){
+                document.getElementById("jdoodle").innerHTML = `
+                <p>Compiled successfully.</p>
+                `;
+            
+                var goToDashboardButton = document.createElement("button");
+                    goToDashboardButton.innerHTML = "Go to Dashboard";
+                    goToDashboardButton.onclick = function() {
+                        // Redirect to the dashboard page
+                        window.location.href = "/dashboard";
+                    };
+                    document.getElementById("jdoodle").appendChild(goToDashboardButton);
+                   
+
+            }
+            else{
+                document.getElementById("jdoodle").innerHTML = `<p>Failed to compile. Try again with compilable file.</p>`;
+
+                 // Create "Go back to Homepage" button
+                 var goBackButton = document.createElement("button");
+                 goBackButton.innerHTML = "Go back to Homepage";
+                 goBackButton.onclick = function() {
+                     // Redirect to the homepage
+                     window.location.href = "/";
+                 };
+                 document.getElementById("jdoodle").appendChild(goBackButton);
+            }
+
+        },
+        error: function(error) {
+            console.error('Error calling Python function:', error);
+        }
+    });
+</script>
+    <!--{% if jdoodle_response %}
+        <p>Compiled by jdoodle</p>
+        <a href="/dashboard">Go to Dashboard</a>
+    {% else %}
+        <p>Not compiled</p>
+        <a href="/">Go back to Upload Page</a>
+    {% endif %}
+    -->
+</body>
+</html>

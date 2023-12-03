@@ -42,17 +42,20 @@
 
    <div class="codesection"> 
 
-    <form id="codeForm" enctype="multipart/form-data">
+    <form action="/analyze" id="codeForm" method="post" enctype="multipart/form-data">
         
         <label for="file">Upload a python file</label> <br>
         <input type="file" id="file" name="file" accept=".py"> <br>
-        <button class="analyze-button" type="button" onclick="analyzeCode()">Analyze Code</button>
-        <button class="dashboard-button" type="button" onclick="gotodashboard()">Go To Dashboard</button>
+        <button class="analyze-button" type="submit">Analyze Code</button>
     </form>
-    <div id="result">
-
-    </div>
    </div>
+
+
+</body>
+</html>
+
+
+<!--
 
 
     <script>
@@ -97,11 +100,10 @@
             }   
         }
     </script>
-</body>
-</html>
 
 
-<!--
+
+
 
 if (data.jdoodle_response === "True") {
                         // Display second button or perform other actions

@@ -1,8 +1,6 @@
 from flask import Flask, render_template, request, jsonify
-from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(app)
 
 @app.route('/')
 def index():
@@ -10,52 +8,33 @@ def index():
 
 @app.route('/analyze', methods=['GET', 'POST'])
 def analyze():
-    try:        
-        samplecode_path = 'samplecode.py'
-        with open(samplecode_path, 'w') as file:
-            file.write('')
-        
-        if 'file' not in request.files:
-            return jsonify({'error': 'No file found'})
-            
-        file = request.files['file']
-           
-        if file.filename=='':
-            return jsonify({'error': 'No selected file'})
-        
-        file_contents = file.read()
-            
-        #code_snippet = request.files['file']
-        #print(code_snippet)
-        
-        with open(samplecode_path, 'w') as f:
-            f.write(file_contents.decode('utf-8'))
-            
-        import jdoodle
-        jdoodle_response = jdoodle.compile_and_execute_code()
-        print(jdoodle_response)
-        
-        if jdoodle_response == True:
-            result = {
-                'jdoodle_response': jdoodle_response
-            }
-            response= jsonify(result)
-            response.headers.add('Access-Control-Allow-Origin', '*')
-            response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')
-            response.headers.add('Access-Control-Allow-Headers', 'Content-Type')
-            response.headers.add('Access-Control-Allow-Credentials', 'true')
-            return response
-        else:
-            result = {
-                'jdoodle_response': jdoodle_response
-            } 
-            return jsonify(result)
+    samplecode_path = 'samplecode.py'
+    with open(samplecode_path, 'w') as file:
+        file.write('')
+    
+    if 'file' not in request.files:
+        return "No file attached."
+    
+    file = request.files['file']
+    
+    if file.filename == '':
+        return "no selected file."
+    
+    content = file.read().decode('utf-8')
+    
+    with open(samplecode_path, 'w') as f:
+        f.write(content)
+    
+    return render_template('result.html')
 
-    except Exception as e:
-        return jsonify({'error': str(e)})
+@app.route('/call_jdoodle')
+def call_jdoodle():
+    import jdoodle
+    response = jdoodle.compile_and_execute_code()
+    return jsonify(response=response)   
 
-@app.route('/button_clicked', methods=['GET', 'POST'])
-def button_clicked():
+@app.route('/dashboard', methods=['GET', 'POST'])
+def dashboard():
     return render_template('dashboard.html')
         
 if __name__ == '__main__':
