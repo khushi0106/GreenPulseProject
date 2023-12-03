@@ -36,8 +36,8 @@ def call_pylint():
 
 @app.route('/call_psutil', methods=['GET', 'POST'])
 def call_psutil():
-    cpu_percent, cpu_threads, memory = psutillog.run_code_file()
-    return jsonify(cpu_percent=cpu_percent, cpu_threads=cpu_threads, memory=memory)
+    cpu_percent, cpu_threads, memory, cpu_time_kernal, disk_usage = psutillog.run_code_file()
+    return jsonify(cpu_percent=cpu_percent, cpu_threads=cpu_threads, memory=memory, cpu_time_kernal=cpu_time_kernal, disk_usage=disk_usage)
 
 @app.route('/call_jdoodle')
 def call_jdoodle():

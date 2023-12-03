@@ -38,9 +38,11 @@
             type: 'GET',
             url: '/call_psutil',
             success: function(response) {
-               document.getElementById("psutil").innerHTML = `<p>CPU PER THREAD: ${response.cpu_percent}</p>
+               document.getElementById("psutil").innerHTML = `<p>CPU % PER THREAD: ${response.cpu_percent}</p>
                <p>Thread Count: ${response.cpu_threads}</p>
-               <p>memory: ${response.memory}</p>`;
+               <p>Memory usage bytes: ${response.memory}</p>
+               <p>CPU Time executing kernal tasks: ${response.cpu_time_kernal}</p>
+               <p>Disk IO Usage %: ${response.disk_usage}</p>`;
             },
             error: function(error) {
                 console.error('Error calling run_pylint endpoint:', error);
