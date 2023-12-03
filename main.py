@@ -1,4 +1,6 @@
 from flask import Flask, render_template, request, jsonify
+import pylint
+import psutillog
 
 app = Flask(__name__)
 
@@ -26,6 +28,16 @@ def analyze():
         f.write(content)
     
     return render_template('result.html')
+
+@app.route('/call_pylint', methods=['GET', 'POST'])
+def call_pylint():
+    pylint_output = pylint.run_pylint()
+    return jsonify(pylint_output=pylint_output)
+
+@app.route('/call_psutil', methods=['GET', 'POST'])
+def call_psutil():
+    cpu_percent, cpu_threads, memory = psutillog.run_code_file()
+    return jsonify(cpu_percent=cpu_percent, cpu_threads=cpu_threads, memory=memory)
 
 @app.route('/call_jdoodle')
 def call_jdoodle():

@@ -4,10 +4,52 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
     <title>Green Pulse Dashboard</title>
     <link rel="stylesheet" type="text/css" href="static/styles.css">
 </head>
 <body>
+
+    <h1>Dashboard: Analysis Results</h1>
+    <div id="pylint">
+
+    </div>
+
+    <div id="psutil">
+
+    </div>
+
+    <script>
+        //pylint output displaying
+        jQuery.ajax({
+            type: 'GET',
+            url: '/call_pylint',
+            success: function(response) {
+               document.getElementById("pylint").innerHTML = `<p>PYLINT OUTPUT: ${response.pylint_output}</p>`;
+            },
+            error: function(error) {
+                console.error('Error calling run_pylint endpoint:', error);
+            }
+        });
+
+        //psutil output displaying
+        jQuery.ajax({
+            type: 'GET',
+            url: '/call_psutil',
+            success: function(response) {
+               document.getElementById("psutil").innerHTML = `<p>CPU PER THREAD: ${response.cpu_percent}</p>
+               <p>Thread Count: ${response.cpu_threads}</p>
+               <p>memory: ${response.memory}</p>`;
+            },
+            error: function(error) {
+                console.error('Error calling run_pylint endpoint:', error);
+            }
+        })
+
+
+    </script>
+
 
     <div class="side-bar-notification-pro-cta-avatar">
         <div class="flex-col">
@@ -39,28 +81,7 @@
         </div>
     </div>
     
-    <h1>Analysis Results</h1>
-    <div id="result"></div>
-
-    <script>
-        // Retrieve data from URL parameters
-        const urlParams = new URLSearchParams(window.location.search);
-        const jdoodleResponse = urlParams.get('jdoodle_response');
-        const lintResponse = urlParams.get('lint_response');
-        const utilCpu = urlParams.get('util_cpu');
-        const utilCpuCount = urlParams.get('util_cpucount');
-        const utilMemory = urlParams.get('util_memory');
-
-        // Display data on the page
-        document.getElementById('result').innerHTML = `
-            <p>Jdoodle Response: ${jdoodleResponse}</p>
-            <p>Pylint Response: ${lintResponse}</p>
-            <p>Cpu percentage: ${utilCpu}</p>
-            <p>CPU Count: ${utilCpuCount}</p>
-            <p>Memory Usage: ${utilMemory}</p>
-        `;
-    </script>
-
+ 
 
 
     <div class="sidebar" style="width: 100%; height: 100%; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 10px; display: inline-flex">
