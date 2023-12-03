@@ -1,5 +1,5 @@
 import requests
-
+import json 
 def compile_and_execute_code():
     
     with open('samplecode.py', 'r') as file:
@@ -21,12 +21,11 @@ def compile_and_execute_code():
 
     if response.status_code == 200:
         result = response.json()
-
-        if 'error' in result:
-            print("response is false")
+        json_string = json.dumps(result)
+        print(json_string)
+        if 'Error' in json_string:
             return False
         else:
-            print("response is true")
             return True
     else:
         # Handle HTTP errors

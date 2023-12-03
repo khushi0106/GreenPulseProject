@@ -7,8 +7,8 @@ def run_pylint():
     
     # Run the command and capture the output
     result = subprocess.run(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
-    
-    return result
+    output_lines = result.stdout.splitlines()
+    return output_lines
 
 # Example usage
 #filename = "samplecode.py"

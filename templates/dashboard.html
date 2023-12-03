@@ -2,11 +2,45 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=1920px, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Green Pulse Dashboard</title>
 </head>
 <body>
     
+    <h1>Analysis Results</h1>
+    <div id="result"></div>
+
+    <script>
+        // Retrieve data from URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const jdoodleResponse = urlParams.get('jdoodle_response');
+        const lintResponse = urlParams.get('lint_response');
+        const utilCpu = urlParams.get('util_cpu');
+        const utilCpuCount = urlParams.get('util_cpucount');
+        const utilMemory = urlParams.get('util_memory');
+
+        // Display data on the page
+        document.getElementById('result').innerHTML = `
+            <p>Jdoodle Response: ${jdoodleResponse}</p>
+            <p>Pylint Response: ${lintResponse}</p>
+            <p>Cpu percentage: ${utilCpu}</p>
+            <p>CPU Count: ${utilCpuCount}</p>
+            <p>Memory Usage: ${utilMemory}</p>
+        `;
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
     <div class="sidebar" style="width: 100%; height: 100%; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 10px; display: inline-flex">
         <div style="width: 290px; height: 1152px; position: relative; background: #1B1C20">
             <div style="width: 259px; height: 316px; left: 31px; top: 168px; position: absolute">

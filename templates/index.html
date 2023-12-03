@@ -48,6 +48,7 @@
         <label for="file">Upload a python file</label> <br>
         <input type="file" id="file" name="file" accept=".py"> <br>
         <button class="analyze-button" type="button" onclick="analyzeCode()">Analyze Code</button>
+        <button class="dashboard-button" type="button" onclick="gotodashboard()">Go To Dashboard</button>
     </form>
     <div id="result">
 
@@ -59,28 +60,42 @@
         function analyzeCode() {
             // Get the file input element
             var fileInput = document.getElementById('file');
-            
-            var formData = new FormData();
 
-            formData.append('file', fileInput.files[0]);
-    
-            fetch('/analyze', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                //Analysis Results: 
-                document.getElementById('result').innerHTML = `<h2>Analysis Results</h2>
-                <p style="margin-bottom: 10px; color: #007bff;">Jdoodle Response: ${data.jdoodle_response}</p>
-                <p style="margin-bottom: 10px; color: #333;">Pylint Response: ${data.lint_response}</p>
-                <p style="margin-bottom: 10px; color: #333;">Cpu percentage: ${data.util_cpu}</p>
-                <p style="margin-bottom: 10px; color: #333;">CPU Count: ${data.util_cpucount}</p>
-                <p style="color: #333;">Memory Usage: ${data.util_memory}</p>`;
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
+            if (fileInput.files.length === 0) {
+                alert('Please select a file before uploading.');
+            } else {
+                var formData = new FormData();
+
+                formData.append('file', fileInput.files[0]);
+
+                fetch('/analyze', {
+                    method: 'POST',
+                    body: formData,
+                })
+                .then(response => response.json())
+                .then(data => {
+                    var response_from_jdoodle = data.jdoodle_response;
+                    console.log("JD Response:  ", response_from_jdoodle);
+
+                    
+                    document.getElementById('result').innerHTML = `
+                    <p>${jdoodle_response}</p> `;
+                })
+                .catch(error => {
+                   console.error('Error:', error);
+                });
+            }
+        }
+
+        function gotodashboard(){
+            var fileInput = document.getElementById('file');
+
+            if (fileInput.files.length === 0) {
+                alert('Please select a file before uploading.');
+            }
+            else {
+                window.location.href = '/button_clicked';
+            }   
         }
     </script>
 </body>
@@ -88,6 +103,28 @@
 
 
 <!--
+
+if (data.jdoodle_response === "True") {
+                        // Display second button or perform other actions
+                        console.log("Code is compiled successfully");
+                    } else {
+                        console.log("Code cannot be compiled. Try again with compilable code.");
+                    }
+
+
+
+console.log('Received data:', data);
+                document.getElementById('result').innerHTML = `<h2>Analysis Results</h2>
+                <p style="margin-bottom: 10px; color: #007bff;">Jdoodle Response: ${data.jdoodle_response}</p>
+                <p style="margin-bottom: 10px; color: #333;">Pylint Response: ${data.lint_response}</p>
+                <p style="margin-bottom: 10px; color: #333;">Cpu percentage: ${data.util_cpu}</p>
+                <p style="margin-bottom: 10px; color: #333;">CPU Count: ${data.util_cpucount}</p>
+                <p style="color: #333;">Memory Usage: ${data.util_memory}</p>`;
+
+
+
+
+
 var json_data = document.getElementById("json_data").value;
 
 // Send code snippet to Flask backend for analysis
