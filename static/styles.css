@@ -97,7 +97,7 @@ body{
     align-items: center;
     justify-content: center;
     position: relative;
-    background-color: #5F6F52;
+    background-color: #000;
 
     & .hero{
         height: 100%;

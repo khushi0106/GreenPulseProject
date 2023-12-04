@@ -11,54 +11,59 @@
 </head>
 <body>
 
-    <h1>Dashboard: Analysis Results</h1>
-    <div id="pylint">
-
-    </div>
-
-    <div id="psutil">
-
-    </div>
-
-    <script>
-        //pylint output displaying
-        jQuery.ajax({
-            type: 'GET',
-            url: '/call_pylint',
-            success: function(response) {
-               document.getElementById("pylint").innerHTML = `<p>PYLINT OUTPUT: ${response.pylint_output}</p>`;
-            },
-            error: function(error) {
-                console.error('Error calling run_pylint endpoint:', error);
-            }
-        });
-
-        //psutil output displaying
-        jQuery.ajax({
-            type: 'GET',
-            url: '/call_psutil',
-            success: function(response) {
-               document.getElementById("psutil").innerHTML = `<p>CPU % PER THREAD: ${response.cpu_percent}</p>
-               <p>Thread Count: ${response.cpu_threads}</p>
-               <p>Memory usage bytes: ${response.memory}</p>
-               <p>CPU Time executing kernal tasks: ${response.cpu_time_kernal}</p>
-               <p>Disk IO Usage %: ${response.disk_usage}</p>`;
-            },
-            error: function(error) {
-                console.error('Error calling run_pylint endpoint:', error);
-            }
-        })
-
-
-    </script>
+    
 
 <!-- Dashboard content starts here -->
 
     <div class="wrapper">
+
+        <div class="analysis-dashboard">
+            <h1>Dashboard: Analysis Results</h1>
+        </div>
+        <div id="pylint">
+    
+        </div>
+    
+        <div id="psutil">
+    
+        </div>
+    
+        <script>
+            //pylint output displaying
+            jQuery.ajax({
+                type: 'GET',
+                url: '/call_pylint',
+                success: function(response) {
+                   document.getElementById("pylint").innerHTML = `<p>PYLINT OUTPUT: ${response.pylint_output}</p>`;
+                },
+                error: function(error) {
+                    console.error('Error calling run_pylint endpoint:', error);
+                }
+            });
+    
+            //psutil output displaying
+            jQuery.ajax({
+                type: 'GET',
+                url: '/call_psutil',
+                success: function(response) {
+                   document.getElementById("psutil").innerHTML = `<p>CPU % PER THREAD: ${response.cpu_percent}</p>
+                   <p>Thread Count: ${response.cpu_threads}</p>
+                   <p>Memory usage bytes: ${response.memory}</p>
+                   <p>CPU Time executing kernal tasks: ${response.cpu_time_kernal}</p>
+                   <p>Disk IO Usage %: ${response.disk_usage}</p>`;
+                },
+                error: function(error) {
+                    console.error('Error calling run_pylint endpoint:', error);
+                }
+            })
+    
+    
+        </script>
+
         <div class="hero">
             <div class="hero-content">
                 <div class="mask">
-                    <h1>GREEN Pulse</h1>
+                    <h1>GREEN PULSE</h1>
                 </div>
             </div>
         </div>

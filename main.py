@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request, jsonify
 import pylint
 import psutillog
-
 app = Flask(__name__)
 
 @app.route('/')
@@ -10,6 +9,7 @@ def index():
 
 @app.route('/analyze', methods=['GET', 'POST'])
 def analyze():
+    
     samplecode_path = 'samplecode.py'
     with open(samplecode_path, 'w') as file:
         file.write('')
