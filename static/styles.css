@@ -71,9 +71,13 @@ button:hover {
 
 /* Main Dashboard CSS here */
 
+/* .container {
+    display: grid; /* or use display: grid; */
+  } */
+
 /* Sidebar CSS */
 
-.side-bar-notification-pro-cta-avatar{
+/* .side-bar-notification-pro-cta-avatar{
     background-color: #1b1c1f;
     height: 1152px;
     overflow: hidden;
@@ -187,5 +191,5 @@ button:hover {
 
 .pagetitle-3{
     min-width: 46px;
-}
+} */
 
