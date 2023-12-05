@@ -17,37 +17,7 @@
 
 <body>
 
-    <script>
-        //pylint output displaying
-        jQuery.ajax({
-            type: 'GET',
-            url: '/call_pylint',
-            success: function(response) {
-               document.getElementById("pylint").innerHTML = `<p>PYLINT OUTPUT: ${response.pylint_output}</p>`;
-            },
-            error: function(error) {
-                console.error('Error calling run_pylint endpoint:', error);
-            }
-        });
-
-        //psutil output displaying
-        jQuery.ajax({
-            type: 'GET',
-            url: '/call_psutil',
-            success: function(response) {
-               document.getElementById("psutil").innerHTML = `<p>CPU % PER THREAD: ${response.cpu_percent}</p>
-               <p>Thread Count: ${response.cpu_threads}</p>
-               <p>Memory usage bytes: ${response.memory}</p>
-               <p>CPU Time executing kernal tasks: ${response.cpu_time_kernal}</p>
-               <p>Disk IO Usage %: ${response.disk_usage}</p>`;
-            },
-            error: function(error) {
-                console.error('Error calling run_pylint endpoint:', error);
-            }
-        })
-
-
-    </script>
+    
 
 	<!-- for header part -->
 	<header>
@@ -129,39 +99,33 @@
 			<div class="box-container">
 
 				<div class="box box1">
-					<div class="text">
-						<h2 id="value1" class="topic-heading"></h2>
+					<div id="value1" class="text">
+						<h2 id="h2-box1"  class="topic-heading"></h2>
 						<h2 class="topic">CPU Percent</h2> 
 					</div>
-
 				</div>
 
 				<div class="box box2">
 					<div id="value2" class="text">
-						<!-- <h2 class="topic-heading">150</h2>
-						<h2 class="topic">Likes</h2> -->
+						<h2 id="h2-box2" class="topic-heading"></h2>
+						<h2 class="topic">CPU Threads</h2>
 					</div>
-
-					
 				</div>
 
 				<div class="box box3">
 					<div id="value3" class="text">
-						<!-- <h2 class="topic-heading">320</h2>
-						<h2 class="topic">Comments</h2> -->
+						<h2 id="h2-box3" class="topic-heading"></h2>
+						<h2 class="topic">Memory</h2>
 					</div>
-
-					
 				</div>
 
 				<div class="box box4">
 					<div id="value4" class="text">
-						<!-- <h2 class="topic-heading">70</h2>
-						<h2 class="topic">Published</h2> -->
+						<h2 id="h2-box4" class="topic-heading"></h2>
+						<h2 class="topic">CPU Kernal Time</h2>
 					</div>
-
-					
 				</div>
+
 			</div>
 
 			<div class="report-container">
@@ -247,6 +211,52 @@
 			</div>
 		</div>
 	</div>
+
+    <script>
+        $(function(){
+            //pylint output displaying
+            jQuery.ajax({
+                type: 'GET',
+                url: '/call_pylint',
+                success: function(response) {
+                document.getElementById("pylint").innerHTML = `<p>PYLINT OUTPUT: ${response.pylint_output}</p>`;
+                },
+                error: function(error) {
+                    console.error('Error calling run_pylint endpoint:', error);
+                }
+            });
+
+            //psutil output displaying
+            jQuery.ajax({
+                type: 'GET',
+                url: '/call_psutil',
+                success: function(response) {
+
+                    document.getElementById("h2-box1").innerHTML= 'CPU % PER THREAD: ${response.cpu_percent}';
+                    document.getElementById("h2-box2").innerHTML= 'Thread Count: ${response.cpu_threads}';
+                    document.getElementById("h2-box3").innerHTML= 'Memory usage bytes: ${response.memory}';
+                    document.getElementById("h2-box4").innerHTML= 'CPU Time executing kernal tasks: ${response.cpu_time_kernal}';
+
+
+                    // document.getElementById("psutil").innerHTML = 
+                    // `<p>CPU % PER THREAD: ${response.cpu_percent}</p>
+                    // <p>Thread Count: ${response.cpu_threads}</p>
+                    // <p>Memory usage bytes: ${response.memory}</p>
+                    // <p>CPU Time executing kernal tasks: ${response.cpu_time_kernal}</p>`;
+                },
+                error: function(error) {
+                    console.error('Error calling run_pylint endpoint:', error);
+                }
+            });
+        })
+
+        
+        // $(document).ready(function() {
+        //     // Adding a class
+        //     $('#value1').html('<p class="data-object">CPU % PER THREAD: ${response.cpu_percent}</p>');
+        // });
+
+    </script>
 
 	<script src="practice-index.js"></script>
 </body>
