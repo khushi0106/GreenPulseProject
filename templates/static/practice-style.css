@@ -12,13 +12,13 @@ font-family: "Poppins", sans-serif;
 :root {
     --background-color1: #93B1A6;
     --background-color2: #183D3D;
-    --background-color3: #ededed;
-    --background-color4: #040D12;
+    --background-color3: #A7D129;
+    --background-color4: #1B1919;
     --primary-color: #4b49ac;
-    --secondary-color: #0c007d;
-    --Border-color: #3f0097;
-    --one-use-color: #3f0097;
-    --two-use-color: #5500cb;
+    --secondary-color: #A7D129;
+    --Border-color: #658525;
+    --one-use-color: #658525;
+    --two-use-color: #658525;
 }
 body {
 background-color: var(--background-color4);
